@@ -12,9 +12,9 @@ import Login from './components/User/Login'
 import Register from './components/User/Register'
 import Logout from './components/User/Logout'
 import Profile from './components/User/Profile'
-import Events from './containers/events/Events'
+import Events from './containers/Events/Events'
 import EventDetails from './components/Event/EventDetails'
-import NewEvent from './containers/events/NewEvent'
+import NewEvent from './containers/Events/NewEvent'
 import Footer from './components/Footer';
 import { motion, AnimatePresence } from 'framer-motion'
 
