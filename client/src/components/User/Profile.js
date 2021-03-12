@@ -17,7 +17,7 @@ export default function Profile({user, setUser}) {
       if (userInfo) {
         setUser(userInfo)
       } else {
-        console.log('No user info found 😞');
+        throw new Error('No user info found 😞');
       }
     };
     getProfile();
