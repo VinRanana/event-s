@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import './Map.css';
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
@@ -11,6 +10,7 @@ export default function Map ({ filteredEvents }) {
   const [lng, setLng] = useState(-0.1);
   const [lat, setLat] = useState(51.5);
   const [zoom, setZoom] = useState(9.8);
+
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: "mapContainer",
@@ -18,6 +18,7 @@ export default function Map ({ filteredEvents }) {
       center: [lng, lat],
       zoom: zoom,
     });
+
     map.on('move', () => {
       setLng(map.getCenter().lng.toFixed(4));
       setLat(map.getCenter().lat.toFixed(4));
@@ -25,7 +26,6 @@ export default function Map ({ filteredEvents }) {
     });
 
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-
 
     const fetchData = () => {
       const newFeaturesList = [];
@@ -78,9 +78,6 @@ export default function Map ({ filteredEvents }) {
       // iterate through the feature collection and append marker to the map for each feature
       results.features.forEach(result => {
         const { geometry } = result;
-        // create marker node
-        // const markerNode = document.createElement('div');
-        // ReactDOM.render(<Marker id={id} />, markerNode);
         // add marker to map
         new mapboxgl.Marker()
           .setLngLat(geometry.coordinates)

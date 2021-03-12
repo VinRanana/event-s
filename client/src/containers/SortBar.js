@@ -29,11 +29,12 @@ export default function SortBar({ checkBoxes, setCheckboxes }) {
   }
 
   return (
-    <Box w={'100%'} justify={'center'} borderRadius="md" mb={10}>
+    <Box w={'100%'} justify={'center'} borderRadius="md" mb={10} >
       <FormControl justify={'center'}>
-        <Flex justify={'center'}  borderRadius="md">
+        <Flex justify={'center'}  borderRadius="md" >
+
           <Accordion w={'100%'}  allowMultiple bg={'gray.100'} borderRadius="md" >
-            <AccordionItem w={'100%'}>
+            <AccordionItem w={'100%'} >
               <h2>
                 <AccordionButton borderRadius="md" >
                   <Box  flex="1" textAlign="center">
@@ -41,28 +42,24 @@ export default function SortBar({ checkBoxes, setCheckboxes }) {
                   </Box>
                 </AccordionButton>
               </h2>
-              <AccordionPanel pb={4}>
-              <CheckboxGroup colorScheme="green" >
-                <Text>Type:</Text>
-                <Wrap
-                 spacing="0px"
-                 >
-                {
-                  listOfTypes.map(el => <Checkbox m={2} onChange={handleCheckboxChange} key={el} value={el}>{el}</Checkbox> )
-                }
-                </Wrap>
-              </CheckboxGroup>
+
+              <AccordionPanel pb={4} >
+                <CheckboxGroup colorScheme="green" >
+                  <Text>Type:</Text>
+
+                  <Wrap spacing="0px" >
+                    {
+                      listOfTypes.map(el => <Checkbox m={2} onChange={handleCheckboxChange} key={el} value={el}>{el}</Checkbox> )
+                    }
+                  </Wrap>
+                </CheckboxGroup>
               </AccordionPanel>
+              
             </AccordionItem>
           </Accordion>
-          </Flex>
-        </FormControl>
-      </Box>
+
+        </Flex>
+      </FormControl>
+    </Box>
   )
 }
-
-// {/* <HStack>
-// <Checkbox onClick={handleCheckboxChange} value="ascending">Ascending</Checkbox>
-// <Checkbox onClick={handleCheckboxChange} value="descending">Descending</Checkbox>
-// <Checkbox onClick={handleCheckboxChange} value="Other">Other</Checkbox>
-// </HStack> */}

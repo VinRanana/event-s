@@ -1,12 +1,13 @@
-/* eslint-disable import/no-anonymous-default-export */
 const URL = 'http://localhost:4000'
 
 function getEvents () {
   return fetchRequest('/events');
 }
+
 function getSingleEvent (id) {
   return fetchRequest('/events/' + id);
 }
+
 function createEvent (body) {
   return fetchRequest('/events', {
     method: 'POST',
@@ -31,6 +32,7 @@ function signUp (id) {
     .then((res) => res.json())
     .catch((err) => console.log(err));
 }
+
 function signDown (id) {
   return fetch(`${URL}/events/${id}/down`, {
     method: 'POST',
@@ -51,4 +53,5 @@ function fetchRequest (path, options) {
     })
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default { getEvents, getSingleEvent, createEvent, signUp, signDown };
