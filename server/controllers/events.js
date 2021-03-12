@@ -1,5 +1,5 @@
 const Events = require('../models/events');
-const Users = require('../models/users');
+const Users = require('../models/users.ts');
 const axios = require('axios');
 
 

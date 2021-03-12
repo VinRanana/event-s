@@ -1,5 +1,5 @@
 
-const User = require('./../models/users');
+const User = require('./../models/users.ts');
 
 const authMiddleware = async (req, res, next) => {
 
