@@ -35,6 +35,7 @@ function App () {
     EventsApiService.createEvent(body)
       .then(event => setEvents([...events, event]))
   }
+
   const signUpDown = (dir, id) => {
     if (dir === 'up') {
       EventsApiService.signUp(id)
@@ -58,68 +59,70 @@ function App () {
         .then(console.log(user))
     }
   }
+
   function updateUser () {
     UsersApiService.profile()
       .then(updated => setUser(updated))
   }
+  
   return (
     <div className="App">
       {
         !status
-          ? <Spinner />
-          : <main>
-            <NavBar isAuthenticated={isAuthenticated} user={user} />
-            {/* <Image /> */}
-            <AnimatePresence>
+        ? <Spinner />
+        : <main>
+          <NavBar isAuthenticated={isAuthenticated} user={user} />
+          <AnimatePresence>
             <Switch>
               <Route path='/' exact component={Home} />
 
-              <Route
-                path="/register"
+              <Route path="/register"
                 render={(props) => (
                   <Register {...props} setIsAuthenticated={setIsAuthenticated} />
                 )}
               />
 
-              <Route
-                path="/login"
+              <Route path="/login"
                 render={(props) => (
                   <Login {...props} setIsAuthenticated={setIsAuthenticated} />
                 )}
               />
 
-              <Route
-                path="/logout"
+              <Route path="/logout"
                 render={(props) => (
                   <Logout {...props} setIsAuthenticated={setIsAuthenticated} />
                 )}
               />
 
-              <Route path='/new-event' render={() => (
-                <NewEvent createEvent={createEvent} user={user} />
-              )} />
-
-              <Route path="/profile" render={() => (
-                <Profile user={user} setUser={setUser} />)}
+              <Route path='/new-event'
+                render={() => (
+                  <NewEvent createEvent={createEvent} user={user} />
+                )}
               />
 
-              {/* <Route path='/my-events' exact render={() => (
-                <MyEvents user={user} />)} /> */}
+              <Route path="/profile"
+                render={() => (
+                  <Profile user={user} setUser={setUser} />
+                )}
+              />
 
-              <Route path='/events' exact render={() => (
-                <Events value={events}/>
-              )} />
-              <Route path='/events/:id' render={() => (
-                <EventDetails events={events} signUpDown={signUpDown} user={user} />
-              )} />
-
-              {/* <Route path='/users/:id' exact component={UserDetails}/> */}
+              <Route path='/events' exact
+                render={() => (
+                  <Events value={events}/>
+                )}
+              />
+              
+              <Route path='/events/:id'
+              render={() => (
+                  <EventDetails events={events} signUpDown={signUpDown} user={user} />
+                )}
+              />
               
               <Route component={Error} />
             </Switch>
-            </AnimatePresence>
-            <Footer />
-          </main>
+          </AnimatePresence>
+          <Footer />
+        </main>
       }
     </div>
   )
