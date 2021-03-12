@@ -9,7 +9,7 @@ exports.getEvents = async (req,res) => {
     res.status(200);
     res.send(events);
   } catch (O_O) {
-    console.error('GET EVENTS: ',error);
+    console.error('GET EVENTS: ',O_O);
     res.status(500);
     res.send(O_O);
   }
@@ -21,7 +21,7 @@ exports.getSingleEvent = async (req,res) => {
     res.status(200);
     res.send(event);
   } catch (O_O) {
-    console.error('SINGLE EVENT: ',error);
+    console.error('SINGLE EVENT: ',O_O);
     res.status(500);
     res.send(O_O);
   }
