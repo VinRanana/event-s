@@ -81,7 +81,7 @@ export default function Profile({user, setUser}) {
                     <Wrap justify={'center'} h={'100%'} p={4} marginTop={'5%'} w={'100%'} justifyContent={'space-around'}  borderRadius="md" >
                       {user.eventList.map(el =>
                         <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ type: 'spring', stiffness: 100, ease: 'easeIn', delay: 1, duration: 1 }} >
+                                    transition={{ type: 'spring', stiffness: 100, ease: 'easeIn', delay: 1, duration: 1 }} key={el._id}>
                           <RouterLink to={`/events/${el._id}`} key={el._id} >
                             <Box borderRadius="md"  h={'100%'}>
                               <Button m={4} >{el.name}</Button>
