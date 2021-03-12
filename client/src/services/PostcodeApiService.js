@@ -12,4 +12,5 @@ function getSingleEvent (body) {
     .catch((err) => console.log(err));
 }
 
-export default { getSingleEvent } ;
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { getSingleEvent };
