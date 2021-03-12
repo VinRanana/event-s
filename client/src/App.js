@@ -16,7 +16,7 @@ import Events from './containers/Events/Events'
 import EventDetails from './components/Event/EventDetails'
 import NewEvent from './containers/Events/NewEvent'
 import Footer from './components/Footer';
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 
 function App () {
   const [status, setStatus] = useState(false)
@@ -73,29 +73,36 @@ function App () {
             <AnimatePresence>
             <Switch>
               <Route path='/' exact component={Home} />
+
               <Route
                 path="/register"
                 render={(props) => (
                   <Register {...props} setIsAuthenticated={setIsAuthenticated} />
                 )}
               />
+
               <Route
                 path="/login"
                 render={(props) => (
                   <Login {...props} setIsAuthenticated={setIsAuthenticated} />
                 )}
               />
+
               <Route
                 path="/logout"
                 render={(props) => (
                   <Logout {...props} setIsAuthenticated={setIsAuthenticated} />
                 )}
               />
+
               <Route path='/new-event' render={() => (
                 <NewEvent createEvent={createEvent} user={user} />
               )} />
+
               <Route path="/profile" render={() => (
-                <Profile user={user} setUser={setUser} />)} />
+                <Profile user={user} setUser={setUser} />)}
+              />
+
               {/* <Route path='/my-events' exact render={() => (
                 <MyEvents user={user} />)} /> */}
 
@@ -105,7 +112,9 @@ function App () {
               <Route path='/events/:id' render={() => (
                 <EventDetails events={events} signUpDown={signUpDown} user={user} />
               )} />
+
               {/* <Route path='/users/:id' exact component={UserDetails}/> */}
+              
               <Route component={Error} />
             </Switch>
             </AnimatePresence>
