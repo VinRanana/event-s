@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { useParams } from 'react-router-dom';
 import Spinner from '../Handling/Spinner'
 import { Flex, Stack, Text, Image, Box, Wrap } from '@chakra-ui/react';
@@ -7,20 +7,44 @@ import Unattend from './Buttons/Unattend';
 import moment from 'moment';
 import { motion } from 'framer-motion'
 
-export default function EventDetails ({events, signUpDown,user}) {
+interface EventDetailsInterface {
+  events: [{
+    _id: string;
+    type: string;
+    name: string;
+    photo: string;
+    location: string;
+    date: string;
+    duration: string;
+    description: string;
+    attendees:[string];
+    limit: string;
+  }];
+  signUpDown: Function;
+  user: {
+    host: string;
+    eventList: [{
+      _id: string;
+    }];
+  };
+}
 
-  let { id } = useParams();
+export default function EventDetails ({events, signUpDown, user}: EventDetailsInterface) {
+
+  let { id } = useParams<{id: string}>();
   const event = events.find(el => el._id === id)
 
-  const handleSubmit = (e) => {
+  const handleSubmit: MouseEventHandler = (e) => {
     e.preventDefault()
     signUpDown('up', id);
   };
 
-  const unattend = (e) => {
+  const unattend: MouseEventHandler = (e) => {
     e.preventDefault()
     signUpDown('down', id);
   };
+
+  const transition = { type: 'spring', ease: 'easeIn', delay: 0.5, duration: 0.5 }
 
   return (
     <Flex minH={'100vh'}  justify={'center'} bg={'custom.100'}
@@ -43,12 +67,12 @@ export default function EventDetails ({events, signUpDown,user}) {
               </Box>
 
               <Stack w={'50%'} align={'center'} >
-              <Flex flexDirection={'column'} justify={'center'}  >
-                <Text fontSize="3xl" m={3} >{event.name}</Text>
-                <Text align={'center'} fontSize="xl" >{event.location}</Text>
-              </Flex>
+                <Flex flexDirection={'column'} justify={'center'}  >
+                  <Text fontSize="3xl" m={3} >{event.name}</Text>
+                  <Text align={'center'} fontSize="xl" >{event.location}</Text>
+                </Flex>
 
-              {
+                {
                   !Object.keys(user).length || user.host ?
                   null :
                   (
@@ -57,7 +81,6 @@ export default function EventDetails ({events, signUpDown,user}) {
                     (<Unattend unattend={unattend}/>)
                   )
                 }
-
               </Stack>
             </Wrap>
             
@@ -67,7 +90,7 @@ export default function EventDetails ({events, signUpDown,user}) {
                   <Flex h={'60%'} flex={1} pl={4} align={'end'} justifyContent={"space-evenly"} flexDirection={'column'} >
                   
                     <motion.div initial={{ opacity: 0, x: "-100vw" }} animate={{ opacity: 1, x:0 }}
-                                transition={{ type: 'spring', ease: 'easeIn', delay: 0.5, duration: 0.5 }} >
+                                transition={{ transition }} >
                       <Wrap  align={'center'} >
                         <Image  borderRadius="md" src={'https://res.cloudinary.com/dujun1hoe/image/upload/v1615296945/event-s/icons/calendar-2_hmjf1m.png'} alt="" />
                         <Text justify={'center'} >{moment(event.date).format("MMM Do YY")}</Text>
@@ -75,7 +98,7 @@ export default function EventDetails ({events, signUpDown,user}) {
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, x: "-100vw" }} animate={{ opacity: 1, x:0 }}
-                                transition={{ type: 'spring', ease: 'easeIn', delay: 0.6, duration: 0.5 }} >
+                                transition={{ transition, delay: 0.6 }} >
                       <Wrap align={'center'} >
                         <Image  borderRadius="md" src={'https://res.cloudinary.com/dujun1hoe/image/upload/v1615296946/event-s/icons/alarm-2_csdsdf.png'} alt="" />
                         <Text>{event.duration}</Text>
@@ -83,7 +106,7 @@ export default function EventDetails ({events, signUpDown,user}) {
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, x: "-100vw" }} animate={{ opacity: 1, x:0 }}
-                                transition={{ type: 'spring', ease: 'easeIn', delay: 0.7, duration: 0.5 }} >
+                                transition={{ transition, delay: 0.7 }} >
                       <Wrap align={'center'} >
                         <Image  borderRadius="md" src={'https://res.cloudinary.com/dujun1hoe/image/upload/v1615297028/event-s/icons/announcement_pr7pea.png'} alt="" />
                         <Text>{event.limit}</Text>
@@ -91,7 +114,7 @@ export default function EventDetails ({events, signUpDown,user}) {
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, x: "-100vw" }} animate={{ opacity: 1, x:0 }}
-                                transition={{ type: 'spring', ease: 'easeIn', delay: 0.8, duration: 0.5 }} >
+                                transition={{ transition, delay: 0.8 }} >
                       <Wrap align={'center'} >
                         <Image  borderRadius="md" src={'https://res.cloudinary.com/dujun1hoe/image/upload/v1615296945/event-s/icons/event_h6dtmv.png'} alt="" />
                         <Text>{event.type}</Text>
@@ -99,7 +122,7 @@ export default function EventDetails ({events, signUpDown,user}) {
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, x: "-100vw" }} animate={{ opacity: 1, x:0 }}
-                                transition={{ type: 'spring', ease: 'easeIn', delay: 0.9, duration: 0.5 }} >
+                                transition={{ transition, delay: 0.9 }} >
                       <Wrap align={'center'} >
                         <Image  borderRadius="md" src={'https://res.cloudinary.com/dujun1hoe/image/upload/v1615296945/event-s/icons/done_r4quc3.png'} alt="" />
                         <Text>{event.attendees}</Text>
@@ -110,7 +133,7 @@ export default function EventDetails ({events, signUpDown,user}) {
                   <Flex h={'100%'} flex={2} p={4} alignContent={'center'}  flexDirection={'column'} >
                     <Text fontWeight="bold" align={'center'}>About this event</Text>
                     <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
-                                transition={{ type: 'spring', ease: 'easeIn', delay: 1, duration: 1 }} >
+                                transition={{ transition, delay: 1, duration: 1 }} >
                     <Text mt={10} align={'center'} >{event.description.slice(0,1200)}...</Text>
                     </motion.div>
                   </Flex>
