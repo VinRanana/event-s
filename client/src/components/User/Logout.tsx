@@ -1,9 +1,13 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import UsersApiService from '../../services/UsersApiService';
 import auth from '../../utils/auth';
 
-export default function Logout(props) {
+interface LogoutInterface {
+  history: [string];
+  setIsAuthenticated: Function;
+}
+
+export const Logout: React.FC<LogoutInterface> = (props) => {
  
   const logout = () => {
     UsersApiService.logout();
