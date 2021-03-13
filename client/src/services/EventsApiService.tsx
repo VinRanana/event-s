@@ -1,14 +1,22 @@
 const URL = 'http://localhost:4000'
 
+interface OptionsInterface {
+  method: string;
+  credentials:RequestCredentials;
+  mode: RequestMode;
+  headers: {},
+  body: string
+}
+
 function getEvents () {
   return fetchRequest('/events');
 }
 
-function getSingleEvent (id) {
+function getSingleEvent (id: string) {
   return fetchRequest('/events/' + id);
 }
 
-function createEvent (body) {
+function createEvent (body: string) {
   return fetchRequest('/events', {
     method: 'POST',
     credentials: 'include',
@@ -21,7 +29,7 @@ function createEvent (body) {
   )
 }
 
-function signUp (id) {
+function signUp (id: string) {
 
   return fetch(`${URL}/events/${id}/up`, {
     method: 'POST',
@@ -33,7 +41,7 @@ function signUp (id) {
     .catch((err) => console.log(err));
 }
 
-function signDown (id) {
+function signDown (id: string) {
   return fetch(`${URL}/events/${id}/down`, {
     method: 'POST',
     credentials: 'include',
@@ -44,7 +52,7 @@ function signDown (id) {
     .catch((err) => console.log(err));
 }
 
-function fetchRequest (path, options) {
+function fetchRequest (path: string, options?: OptionsInterface) {
   return fetch(URL + path, options)
     .then(res => res.status <= 400 ? res: Promise.reject())
     .then(response => response.status === 204 ? response : response.json())
