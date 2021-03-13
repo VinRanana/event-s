@@ -1,4 +1,4 @@
-const Events = require('../models/events');
+const { Events } = require('../models/events');
 const Users = require('../models/users');
 const axios = require('axios');
 

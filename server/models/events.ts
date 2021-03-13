@@ -58,5 +58,4 @@ const EventSchemaFields: Record<keyof IEvent, any> = {
 
 const EventSchema = new Schema(EventSchemaFields);
 
-const Events = model<IEventDoc>('Events', EventSchema);
-module.exports = Events;
+export const Events = model<IEventDoc>('Events', EventSchema);
