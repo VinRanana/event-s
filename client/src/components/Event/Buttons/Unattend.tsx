@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import {
   Button, Popover, PopoverTrigger, Portal, PopoverContent,
   PopoverArrow, PopoverHeader, PopoverCloseButton, PopoverBody, ButtonGroup,
 } from '@chakra-ui/react';
 
-export default function Unattend ({unattend}) {
+interface HandleSubmitInterface {
+  unattend: MouseEventHandler
+}
+
+export default function Unattend ({unattend}: HandleSubmitInterface) {
 
   return (
     <Popover>
