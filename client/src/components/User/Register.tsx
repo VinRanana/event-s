@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, MouseEventHandler } from 'react';
 import UsersApiService from '../../services/UsersApiService';
 import auth from '../../utils/auth';
 import {
@@ -14,7 +14,27 @@ import {
   FormHelperText
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion'
-const initialState = {
+
+interface InitialStateInterface {
+  email: string,
+  password: string,
+  firstName: string,
+  lastName: string,
+  photo: string,
+  host: string
+}
+
+interface RegisterInterface {
+  history: [string];
+  setIsAuthenticated: Function
+}
+
+interface EventTargetInterface {
+  name: string;
+  value: string | Boolean;
+}
+
+const initialState: InitialStateInterface = {
   email: '',
   password: '',
   firstName: '',
@@ -23,11 +43,11 @@ const initialState = {
   host: ''
 };
 
-export default function Register (props) {
+export default function Register (props: RegisterInterface) {
   const [state, setState] = useState(initialState);
 
-  const handleChange = (e) => {
-    let { name, value } = e.target;
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    let { name, value }: EventTargetInterface = e.target;
     if (name === 'host') {
       value = value === 'Guest' ? false : true
     }
@@ -38,7 +58,7 @@ export default function Register (props) {
     console.log(state)
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit: MouseEventHandler = async (e) => {
     e.preventDefault();
 
     const { email, password, firstName, lastName, host, photo } = state;
@@ -55,9 +75,12 @@ export default function Register (props) {
 
   const validateForm = () => {
     return (
-      !state.email || !state.password || !state.firstName || !state.lastName || !state.host === ''
+      !state.email || !state.password || !state.firstName || !state.lastName/* || !state.host === ''*/
     );
   };
+
+  const transition = { type: 'spring', stiffness: 100, ease: 'linear' }
+
   return (
     <Flex
       minH={'100vh'} align={'center'} justify={'center'} bg={'gray.100'}
@@ -66,7 +89,7 @@ export default function Register (props) {
     >
       <Stack spacing={8} w={'50%'} maxW={'lg'} py={12} px={6} >
         <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
-                    transition={{ type: 'spring', stiffness: 100, ease: 'linear' }} exit={{ opacity: 0, x: "-100vw" }} >
+                    transition={{transition}} exit={{ opacity: 0, x: "-100vw" }} >
           <Stack align={'center'} >
             <Heading color={'white'} fontSize={'4xl'} >Create new account</Heading>
           </Stack>
