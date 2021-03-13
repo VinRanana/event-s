@@ -1,7 +1,6 @@
 const URL = 'api.postcodes.io/postcodes'
 
-
-function getSingleEvent (body) {
+function getSingleEvent (body: string) {
   return fetch(`${URL}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
