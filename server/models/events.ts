@@ -1,4 +1,4 @@
-import { Schema, model, Date } from 'mongoose';
+import { Schema, model, Date, Document } from 'mongoose';
 
 interface IEvent {
   name: string,
@@ -14,6 +14,8 @@ interface IEvent {
   owner: string,
   list?: object[]
 }
+
+interface IEventDoc extends IEvent, Document {}
 
 const EventSchemaFields: Record<keyof IEvent, any> = {
   name: {
@@ -56,5 +58,5 @@ const EventSchemaFields: Record<keyof IEvent, any> = {
 
 const EventSchema = new Schema(EventSchemaFields);
 
-const Events = model('Events', EventSchema);
+const Events = model<IEventDoc>('Events', EventSchema);
 module.exports = Events;
