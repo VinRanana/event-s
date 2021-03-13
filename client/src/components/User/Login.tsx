@@ -16,7 +16,7 @@ import {
 import { motion } from 'framer-motion'
 
 interface LoginInterface {
-  history: any;
+  history: [string];
   setIsAuthenticated: Function
 }
 
