@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, MouseEvent } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import UsersApiService from '../../services/UsersApiService';
 import auth from '../../utils/auth';
@@ -15,15 +15,25 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion'
 
-const initialState = {
+interface LoginInterface {
+  history: any;
+  setIsAuthenticated: Function
+}
+
+interface StateInterface {
+  email: string;
+  password: string;
+}
+
+const initialState: StateInterface = {
   email: '',
   password: '',
 };
 
-export default function Login(props) {
+export const Login: React.FC<LoginInterface> = (props) => {
   const [state, setState] = useState(initialState);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setState((prevState) => ({
       ...prevState,
@@ -31,7 +41,7 @@ export default function Login(props) {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: MouseEvent) => {
     e.preventDefault();
 
     const { email, password } = state;
@@ -52,14 +62,16 @@ export default function Login(props) {
     return !state.email || !state.password;
   };
 
+  const transition = { type: 'spring', stiffness: 100, ease: 'easeIn' }
+
   return (
     <Flex minH={'100vh'} align={'center'} justify={'center'} bg={'custom.100'}
     bgImage="url('https://res.cloudinary.com/dujun1hoe/image/upload/v1615228154/event-s/gradient-background-26046-26731-hd-wallpapers.jpg_cenrqe.png')"  
     bgSize="100%"
     backgroundRepeat="no-repeat" >
       <motion.div initial={{ opacity: 0, x: "-100vw" }} animate={{ opacity: 1, x:0 }}
-                  transition={{ type: 'spring', stiffness: 100, ease: 'easeIn' }} exit={{ opacity: 0, x: "-100vw" }} >
-
+                  transition={transition} exit={{ opacity: 0, x: "-100vw" }}
+      >
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6} >
           <Stack align={'center'} >
             <Heading color={'white'} fontSize={'4xl'}>Sign in to your account</Heading>
