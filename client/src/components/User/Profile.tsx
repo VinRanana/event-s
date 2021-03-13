@@ -9,7 +9,23 @@ import {
 } from '@chakra-ui/react';
 import { motion } from "framer-motion"
 
-export default function Profile({user, setUser}) {
+interface ProfileInterface {
+  user: {
+    email: string;
+    // password: string;
+    firstName: string;
+    lastName: string;
+    host: string;
+    photo: string;
+    eventList: [{
+      _id: string;
+      name: string;
+    }]
+  };
+  setUser: Function;
+}
+
+export default function Profile({user, setUser}: ProfileInterface) {
 
   useEffect(() => {
     const getProfile = async () => {
@@ -23,6 +39,8 @@ export default function Profile({user, setUser}) {
     getProfile();
   }, [setUser]);
 
+  const transition = {type: 'spring', ease: 'easeIn', duration: 1}
+  const transition2 = { ...transition, stiffness: 100, delay: 2, duration: 4 }
 
   return (
     <Box h={'100%'} >
@@ -32,7 +50,7 @@ export default function Profile({user, setUser}) {
         backgroundRepeat="no-repeat" justify={'center'} align={'center'}
       >
         <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
-                    transition={{ type: 'spring', ease: 'easeIn', duration: 1 }} >
+                    transition={{transition}} >
           <Flex borderRadius="md" bg={'custom.100'} flexDirection={'column'} maxW={'900px'} minH={'60%'} minW={'300px'} p={8} >
             {
               user.firstName ? <>
@@ -40,7 +58,7 @@ export default function Profile({user, setUser}) {
                 <Flex w={'100%'} justify={'center'} p={4} spacing="0px" maxH={'300px'} >
                   <Box boxSize="sm" h={'100%'} >
                     <motion.div initial={{ opacity: 0, x: "-100vw" }} animate={{ opacity: 1, x:0 }}
-                                transition={{ type: 'spring', ease: 'easeIn', delay: 0.5, duration: 1 }} >
+                                transition={{ transition, delay: 0.5 }} >
                       <Image alignSelf={'center'} boxShadow={'md'} borderRadius="md" src={user.photo}  alt="" minW={'300px'} />
                     </motion.div>
                   </Box>
@@ -48,7 +66,7 @@ export default function Profile({user, setUser}) {
                   <Flex w={'40vh'} align={'center'} justify={'center'} flexDirection={'column'} >
                     <Heading align={'center'} >Welcome </Heading>
                     <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
-                                transition={{ type: 'spring', stiffness: 100, ease: 'easeIn', delay: 2, duration: 4 }} >
+                                transition={{ transition2 }} >
                       <Heading align={'center'} > {user.firstName} {user.lastName}</Heading>
                     </motion.div>
                   </Flex>
@@ -56,7 +74,7 @@ export default function Profile({user, setUser}) {
 
                 <Flex m={5} align={'center'} justify={'center'} dir={'row'} justifyContent={'space-evenly'} >
                   <motion.div initial={{ opacity: 0, x: "-100vw" }} animate={{ opacity: 1, x:0 }}
-                              transition={{ type: 'spring', ease: 'easeIn', delay: 0.7, duration: 1 }} >
+                              transition={{ transition, delay: 0.7 }} >
                     <Box align={'center'} >
                       <Image src={'https://res.cloudinary.com/dujun1hoe/image/upload/v1615239488/event-s/account_ee8lc9.png'}/>
                       <Text>User type:</Text>
@@ -65,7 +83,7 @@ export default function Profile({user, setUser}) {
                   </motion.div>
 
                   <motion.div initial={{ opacity: 0, x: "-100vw" }} animate={{ opacity: 1, x:0 }}
-                              transition={{ type: 'spring', ease: 'easeIn', delay: 0.9, duration: 1 }} >
+                              transition={{ transition, delay: 0.9 }} >
                     <Box align={'center'} >
                       <Image src={'https://res.cloudinary.com/dujun1hoe/image/upload/v1615239489/event-s/calendar_qsoxdg.png'} />
                       <Text>Number of events:</Text>
@@ -81,7 +99,7 @@ export default function Profile({user, setUser}) {
                     <Wrap justify={'center'} h={'100%'} p={4} marginTop={'5%'} w={'100%'} justifyContent={'space-around'}  borderRadius="md" >
                       {user.eventList.map(el =>
                         <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ type: 'spring', stiffness: 100, ease: 'easeIn', delay: 1, duration: 1 }} key={el._id}>
+                                    transition={{ transition, delay: 1 }} key={el._id}>
                           <RouterLink to={`/events/${el._id}`} key={el._id} >
                             <Box borderRadius="md"  h={'100%'}>
                               <Button m={4} >{el.name}</Button>
