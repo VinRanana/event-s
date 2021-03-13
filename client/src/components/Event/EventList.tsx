@@ -2,13 +2,15 @@ import React from 'react';
 import EventCard from './EventCard';
 import { Wrap } from "@chakra-ui/react"
 
-interface EventListInterface {
+export interface EventListInterface {
   value: [{
     _id: string;
     name: string;
     photo: string;
     location: string;
     date: string;
+    description: string;
+    type: never;
   }]
 }
 
