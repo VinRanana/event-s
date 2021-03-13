@@ -30,7 +30,7 @@ const initialState: StateInterface = {
   password: '',
 };
 
-export const Login: React.FC<LoginInterface> = (props) => {
+export default function Login (props: LoginInterface)  {
   const [state, setState] = useState(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

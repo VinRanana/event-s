@@ -7,7 +7,7 @@ interface LogoutInterface {
   setIsAuthenticated: Function;
 }
 
-export const Logout: React.FC<LogoutInterface> = (props) => {
+export default function Logout (props:LogoutInterface) {
  
   const logout = () => {
     UsersApiService.logout();
