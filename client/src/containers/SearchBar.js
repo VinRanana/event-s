@@ -8,7 +8,6 @@ import {
 
 export default function SearchBar({ searchTerm, setSearchTerm }) {
   const handleChange = event => {
-
     setSearchTerm(event.target.value.toLowerCase());
   };
 

@@ -3,7 +3,7 @@ import EventCard from './EventCard';
 import { Wrap } from "@chakra-ui/react"
 
 export interface EventListInterface {
-  value: [{
+  value: {
     _id: string;
     name: string;
     photo: string;
@@ -11,7 +11,7 @@ export interface EventListInterface {
     date: string;
     description: string;
     type: never;
-  }]
+  }[]
 }
 
 export default function EventList ({value}: EventListInterface) {

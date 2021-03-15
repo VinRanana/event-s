@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EventList from "../../components/Event/EventList";
+import EventList, { EventListInterface } from "../../components/Event/EventList";
 import SearchBar from "../SearchBar";
 import SortBar from "../SortBar";
 import Map from "../map/Map";
@@ -7,7 +7,7 @@ import Spinner from '../../components/Handling/Spinner';
 import { Box, Flex, Text ,Stack, Heading } from "@chakra-ui/react";
 import { motion } from 'framer-motion';
 
-export default function Events({ value }) {
+export default function Events({ value }: EventListInterface) {
   const [filteredEvents, setFilteredEvents] = useState([...value]);
   const [searchTerm, setSearchTerm] = useState('')
   const [checkBoxes, setCheckboxes] = useState([])
