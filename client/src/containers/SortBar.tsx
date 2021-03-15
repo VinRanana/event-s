@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from 'react';
+import React, { ChangeEventHandler, Dispatch, SetStateAction } from 'react';
 import {
   Flex,
   Box,
@@ -17,7 +17,7 @@ const listOfTypes = [
 
 interface SortInterface {
   checkBoxes: string[],
-  setCheckboxes: Function
+  setCheckboxes: Dispatch<SetStateAction<string[]>>
 }
 
 export default function SortBar({ checkBoxes, setCheckboxes }: SortInterface) {

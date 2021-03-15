@@ -6,28 +6,7 @@ import Attend from './Buttons/Attend';
 import Unattend from './Buttons/Unattend';
 import moment from 'moment';
 import { motion } from 'framer-motion'
-
-interface EventDetailsInterface {
-  events: [{
-    _id: string;
-    type: string;
-    name: string;
-    photo: string;
-    location: string;
-    date: string;
-    duration: string;
-    description: string;
-    attendees:[string];
-    limit: string;
-  }];
-  signUpDown: Function;
-  user: {
-    host: string;
-    eventList: [{
-      _id: string;
-    }];
-  };
-}
+import { EventDetailsInterface } from '../../interfaces/events.interfaces';
 
 export default function EventDetails ({events, signUpDown, user}: EventDetailsInterface) {
 

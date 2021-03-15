@@ -3,18 +3,13 @@ import { Box, Flex, Image , Stack, Heading, Text, useColorModeValue } from '@cha
 import { Link as RouterLink } from 'react-router-dom';
 import moment from 'moment';
 import { motion } from 'framer-motion';
+import { EventInterface } from '../../interfaces/events.interfaces';
 
-interface ValueInterface {
-  value: {
-    _id: string;
-    name: string;
-    photo: string;
-    location: string;
-    date: string;
-  }
+interface IEventProp {
+  event: EventInterface
 }
 
-function EventCard ({value}: ValueInterface) {
+function EventCard ({event}: IEventProp) {
 
   return (
     <Box maxW={'40%'} h={'250px'} maxH={'50%'} w={'25%'} bg={useColorModeValue('white', 'gray.900')}
@@ -24,20 +19,20 @@ function EventCard ({value}: ValueInterface) {
                   transition={{ duration: 0.5, ease: "easeInOut", times: [0, 0.2, 0.5, 0.8, 0] }}
                   whileHover={{ scale: 1.1, transition: { duration: .2 } }}>
 
-        <RouterLink to={{ pathname: `/events/${value._id}`, state: {event: value}}}>
+        <RouterLink to={{ pathname: `/events/${event._id}`, state: {event: event}}}>
           <Flex flexDirection="column" justifyContent="center" alignItems="center">
 
             <Box h={'20%'} bg={'gray.100'} mt={-6}  mx={-6} mb={2} pos={'relative'}>
-              <Image borderRadius="md" src={value.photo} />
+              <Image borderRadius="md" src={event.photo} />
             </Box>
 
             <Stack>
               <Heading color={useColorModeValue('gray.700', 'white')} fontSize={'medium'} fontFamily={'body'}>
-                {value.name}
+                {event.name}
               </Heading>
 
-              <Text color={'gray.500'}>{value.location}</Text>
-              <Text >{moment(value.date).format("MMM Do YY")}</Text>
+              <Text color={'gray.500'}>{event.location}</Text>
+              <Text >{moment(event.date).format("MMM Do YY")}</Text>
             </Stack>
 
           </Flex>

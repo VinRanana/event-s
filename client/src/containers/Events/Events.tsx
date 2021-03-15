@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from "react";
-import EventList, { EventListInterface } from "../../components/Event/EventList";
+import EventList from "../../components/Event/EventList";
 import SearchBar from "../SearchBar";
 import SortBar from "../SortBar";
 import Map from "../map/Map";
 import Spinner from '../../components/Handling/Spinner';
 import { Box, Flex, Text ,Stack, Heading } from "@chakra-ui/react";
 import { motion } from 'framer-motion';
+import { EventListInterface } from "../../interfaces/events.interfaces";
 
-export default function Events({ value }: EventListInterface) {
-  // value = value === undefined ? [] : value; // Need an alternative to display rather than the error
+export default function Events({ events }: EventListInterface) {
+  // events = events === undefined ? [] : events; // Need an alternative to display rather than the error
   // testing should catch this
 
-  const [filteredEvents, setFilteredEvents] = useState([...value]);
+  const [filteredEvents, setFilteredEvents] = useState([...events]);
   const [searchTerm, setSearchTerm] = useState('')
-  const [checkBoxes, setCheckboxes] = useState([])
+  const [checkBoxes, setCheckboxes] = useState<string[]>([])
 
   useEffect(() => {
-    let events = value;
-    if (searchTerm) events = value.filter(
-      event => event.name.toLowerCase().includes(searchTerm) || event.description.toLowerCase().includes(searchTerm)
+    let filteredEvents = events;
+    if (searchTerm) filteredEvents = events.filter(
+      events => events.name.toLowerCase().includes(searchTerm) || events.description.toLowerCase().includes(searchTerm)
       )
 
-    if (checkBoxes.length) events = events.filter(event => checkBoxes.includes(event.type))
+    if (checkBoxes.length) filteredEvents = filteredEvents.filter(event => checkBoxes.includes(event.type))
 
-    setFilteredEvents(events);
-  }, [value, searchTerm, checkBoxes])
+    setFilteredEvents(filteredEvents);
+  }, [events, searchTerm, checkBoxes])
 
   return (
     <Box bg={'custom.100'} h={'100vh'}
@@ -61,7 +62,7 @@ export default function Events({ value }: EventListInterface) {
               <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
               <Box w={'100%'} overflow={'scroll'} h={'100vh'} mt={10} >
-                <EventList value={filteredEvents} />
+                <EventList events={filteredEvents} />
               </Box>
             </Flex>
           </>)
