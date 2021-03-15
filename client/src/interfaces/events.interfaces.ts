@@ -9,6 +9,7 @@ export interface EventInterface {
   duration: number,
   photo: string,
   attendees?:[string];
+  user?: {}
 }
 
 export interface EventDetailsInterface {

@@ -43,7 +43,6 @@ export default function Register (props: AuthInterface) {
       ...prevState,
       [name]: value
     }));
-    console.log(state)
   };
 
   const handleSubmit: MouseEventHandler = async (e) => {

@@ -52,7 +52,8 @@ export default function NewEvent ({createEvent, user}: NewEventInterface) {
     } else if (event.name === '' || event.location === '') {
       alert('Please fill out all the required fields')
     }
-    console.log('hello')
+    event.user = user;
+    console.log('event:', event)
     createEvent(event)
     setEvent(EventObject)
   }
