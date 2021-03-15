@@ -1,13 +1,9 @@
 import React from 'react';
+import { AuthInterface } from '../../interfaces/user.interfaces';
 import UsersApiService from '../../services/UsersApiService';
 import auth from '../../utils/auth';
 
-interface LogoutInterface {
-  history: [string];
-  setIsAuthenticated: Function;
-}
-
-export default function Logout (props:LogoutInterface) {
+export default function Logout (props:AuthInterface) {
  
   const logout = () => {
     UsersApiService.logout();
