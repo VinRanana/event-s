@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import {
   Flex,
   Box,
@@ -6,9 +6,14 @@ import {
   Input
 } from '@chakra-ui/react';
 
-export default function SearchBar({ searchTerm, setSearchTerm }) {
-  const handleChange = event => {
-    setSearchTerm(event.target.value.toLowerCase());
+interface SearchInterface {
+  searchTerm: string,
+  setSearchTerm: Function
+}
+
+export default function SearchBar({ searchTerm, setSearchTerm }: SearchInterface) {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
+    setSearchTerm(e.target.value.toLowerCase());
   };
 
   return (

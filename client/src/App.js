@@ -19,8 +19,8 @@ import Footer from './components/Footer';
 import { AnimatePresence } from 'framer-motion'
 
 function App () {
-  const [status, setStatus] = useState(false)
-  const [events, setEvents] = useState([])
+  const [status, setStatus] = useState(false);
+  const [events, setEvents] = useState([]);
   const initialState = auth.isAuthenticated()
   const [isAuthenticated, setIsAuthenticated] = useState(initialState)
   const [user, setUser] = useState({})
@@ -33,7 +33,7 @@ function App () {
 
   const createEvent = (body) => {
     EventsApiService.createEvent(body)
-      .then(event => setEvents([...events, event]))
+      .then((event) => setEvents([...events, event]))
   }
 
   const signUpDown = (dir, id) => {
@@ -46,7 +46,6 @@ function App () {
           return copy
         }))
         .then(() => updateUser())
-        .then(console.log(user))
     } else {
       EventsApiService.signDown(id)
         .then(updated => setEvents((events) => {
@@ -56,13 +55,12 @@ function App () {
           return copy
         }))
         .then(() => updateUser())
-        .then(console.log(user))
     }
   }
 
   function updateUser () {
     UsersApiService.profile()
-      .then(updated => setUser(updated))
+      .then((updated) => setUser(updated))
   }
   
   return (
@@ -108,12 +106,12 @@ function App () {
 
               <Route path='/events' exact
                 render={() => (
-                  <Events value={events}/>
+                  <Events events={events}/>
                 )}
               />
               
               <Route path='/events/:id'
-              render={() => (
+                render={() => (
                   <EventDetails events={events} signUpDown={signUpDown} user={user} />
                 )}
               />

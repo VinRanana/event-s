@@ -10,13 +10,13 @@ import {
   Image
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import sample from './intro.mp4'
+import sample from '../assets/intro.mp4'
 
 function Home() {
   
   return (
     <div className="Container" >
-      <video autoPlay="autoplay" loop="loop" muted className="Video" >
+      <video autoPlay loop muted className="Video" >
         <source src={sample} type="video/mp4" />
         Your browser does not support the video tag.
       </video>

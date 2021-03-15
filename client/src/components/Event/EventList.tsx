@@ -1,25 +1,14 @@
 import React from 'react';
 import EventCard from './EventCard';
 import { Wrap } from "@chakra-ui/react"
+import { EventListInterface } from '../../interfaces/events.interfaces';
 
-export interface EventListInterface {
-  value: {
-    _id: string;
-    name: string;
-    photo: string;
-    location: string;
-    date: string;
-    description: string;
-    type: never;
-  }[]
-}
-
-export default function EventList ({value}: EventListInterface) {
+export default function EventList ({events}: EventListInterface) {
   return (
     <Wrap w={'100%'} marginTop={5} align="start">
       {
-        value.filter(event => event.date > new Date().toISOString())
-        .map(event => <EventCard value={event} key={event._id}/>)
+        events.filter(event => event.date > new Date().toISOString())
+        .map(event => <EventCard event={event} key={event._id}/>)
       }
     </Wrap>
   )

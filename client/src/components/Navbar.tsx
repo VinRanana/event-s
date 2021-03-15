@@ -25,8 +25,14 @@ import {
 
 } from '@chakra-ui/react';
 import { Link as RouterLink } from "react-router-dom"
+import { UserInterface } from '../interfaces/user.interfaces';
 
-export default function NavigationBar({ isAuthenticated, user }) {
+interface NavBarInterface {
+  isAuthenticated: boolean,
+  user: UserInterface
+}
+
+export default function NavigationBar({ isAuthenticated, user }: NavBarInterface) {
 
   return (
     <>
@@ -56,7 +62,7 @@ export default function NavigationBar({ isAuthenticated, user }) {
           <Flex alignItems={'center'} >
             <Menu placement="top-end" >
               <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} >
-                <Avatar size={'sm'} src={isAuthenticated ? user.photo : null} />
+                <Avatar size={'sm'} src={isAuthenticated ? user.photo : ''} />
               </MenuButton>
 
               <MenuList>
