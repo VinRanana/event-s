@@ -8,22 +8,7 @@ import {
   Button, Image, Heading, Wrap, Stack
 } from '@chakra-ui/react';
 import { motion } from "framer-motion"
-
-interface ProfileInterface {
-  user: {
-    email: string;
-    // password: string;
-    firstName: string;
-    lastName: string;
-    host: string;
-    photo: string;
-    eventList: [{
-      _id: string;
-      name: string;
-    }]
-  };
-  setUser: Function;
-}
+import { ProfileInterface } from '../../interfaces/user.interfaces';
 
 export default function Profile({user, setUser}: ProfileInterface) {
 

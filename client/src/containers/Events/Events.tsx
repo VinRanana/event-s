@@ -15,41 +15,16 @@ export default function Events({ value }: EventListInterface) {
   const [searchTerm, setSearchTerm] = useState('')
   const [checkBoxes, setCheckboxes] = useState([])
 
-  function search () {
-    if (!searchTerm && checkBoxes.length) return check()
-    const events = checkBoxes.length ? filteredEvents : value
-    const search = events.filter(event =>
-      event.name.toLowerCase().includes(searchTerm) || event.description.toLowerCase().includes(searchTerm)
-    );
-    setFilteredEvents(search);
-  }
-
-  function check () {
-    if(!checkBoxes.length && !searchTerm) return setFilteredEvents(value)
-    if(!checkBoxes.length && searchTerm) {
-      search()
-    } else {
-      const events = searchTerm ? filteredEvents : value
-      const checkboxes = events.filter(event =>
-        checkBoxes.includes(event.type)
-      );
-      setFilteredEvents(checkboxes);
-      console.log(checkBoxes)
-    }
-  }
-
   useEffect(() => {
-    if(!checkBoxes.length && !searchTerm) return setFilteredEvents(value)
-    if(checkBoxes.length && !searchTerm) {
-      check()
-    }
-    search()
+    let events = value;
+    if (searchTerm) events = value.filter(
+      event => event.name.toLowerCase().includes(searchTerm) || event.description.toLowerCase().includes(searchTerm)
+      )
 
-  }, [searchTerm])
+    if (checkBoxes.length) events = events.filter(event => checkBoxes.includes(event.type))
 
-  useEffect(() => {
-    check()
-  }, [checkBoxes])
+    setFilteredEvents(events);
+  }, [value, searchTerm, checkBoxes])
 
   return (
     <Box bg={'custom.100'} h={'100vh'}

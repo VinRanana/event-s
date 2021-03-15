@@ -14,36 +14,24 @@ import {
   FormHelperText
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion'
-
-interface InitialStateInterface {
-  email: string,
-  password: string,
-  firstName: string,
-  lastName: string,
-  photo: string,
-  host: string
-}
-
-interface RegisterInterface {
-  history: [string];
-  setIsAuthenticated: Function
-}
+import { AuthInterface, UserInterface } from '../../interfaces/user.interfaces';
 
 interface EventTargetInterface {
   name: string;
   value: string | Boolean;
 }
 
-const initialState: InitialStateInterface = {
+const initialState: UserInterface = {
   email: '',
   password: '',
   firstName: '',
   lastName: '',
   photo: '',
-  host: ''
+  host: '',
+  eventList: []
 };
 
-export default function Register (props: RegisterInterface) {
+export default function Register (props: AuthInterface) {
   const [state, setState] = useState(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

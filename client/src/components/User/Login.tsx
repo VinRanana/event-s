@@ -14,11 +14,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion'
-
-interface LoginInterface {
-  history: [string];
-  setIsAuthenticated: Function
-}
+import { AuthInterface } from '../../interfaces/user.interfaces';
 
 interface StateInterface {
   email: string;
@@ -30,7 +26,7 @@ const initialState: StateInterface = {
   password: '',
 };
 
-export default function Login (props: LoginInterface)  {
+export default function Login (props: AuthInterface)  {
   const [state, setState] = useState(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
