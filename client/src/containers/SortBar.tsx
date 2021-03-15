@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import {
   Flex,
   Box,
@@ -15,9 +15,14 @@ const listOfTypes = [
   'Food','Music','Sport','Leisure','Outdoor','Other',
 ]
 
-export default function SortBar({ checkBoxes, setCheckboxes }) {
+interface SortInterface {
+  checkBoxes: string[],
+  setCheckboxes: Function
+}
 
-  let handleCheckboxChange = (e) => {
+export default function SortBar({ checkBoxes, setCheckboxes }: SortInterface) {
+
+  let handleCheckboxChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault()
     let selectedCheckboxes = [...checkBoxes];
     if (!checkBoxes.includes(e.target.value)){
