@@ -1,6 +1,23 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model, Date, Document } from 'mongoose';
 
-const eventSchema = new Schema({
+interface IEvent {
+  name: string,
+  date?: Date,
+  location: string,
+  geolocation?: string,
+  limit?: number,
+  duration?: number,
+  attendees?: number,
+  photo?: string,
+  type: string,
+  description?: string,
+  owner: string,
+  list?: object[]
+}
+
+interface IEventDoc extends IEvent, Document {}
+
+const EventSchemaFields: Record<keyof IEvent, any> = {
   name: {
     type: String, required: true,
   },
@@ -37,6 +54,8 @@ const eventSchema = new Schema({
   list: [{
     type: Schema.Types.ObjectId, ref: 'Users',
   }],
-});
+}
 
-module.exports = model('Events', eventSchema);
+const EventSchema = new Schema(EventSchemaFields);
+
+export const Events = model<IEventDoc>('Events', EventSchema);

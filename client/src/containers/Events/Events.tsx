@@ -8,6 +8,9 @@ import { Box, Flex, Text ,Stack, Heading } from "@chakra-ui/react";
 import { motion } from 'framer-motion';
 
 export default function Events({ value }: EventListInterface) {
+  // value = value === undefined ? [] : value; // Need an alternative to display rather than the error
+  // testing should catch this
+
   const [filteredEvents, setFilteredEvents] = useState([...value]);
   const [searchTerm, setSearchTerm] = useState('')
   const [checkBoxes, setCheckboxes] = useState([])

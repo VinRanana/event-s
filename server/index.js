@@ -3,7 +3,7 @@ const cors = require('cors');
 const router = require('./router');
 const connection = require('./models');
 const session = require('express-session');
-const config = require('./config');
+const config = require('./config').config;
 
 const app = express();
 
