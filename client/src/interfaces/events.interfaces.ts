@@ -8,7 +8,8 @@ export interface EventInterface {
   date: string,
   duration: number,
   photo: string,
-  attendees?:[string];
+  attendees?:string[],
+  user?: {}
 }
 
 export interface EventDetailsInterface {
