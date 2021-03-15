@@ -10,5 +10,5 @@ export interface EventInterface {
 }
 
 export interface EventListInterface {
-  
+
 }
