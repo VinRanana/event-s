@@ -1,5 +1,4 @@
-import tempImage from './assets/1.jpg'
-import React, { useState } from 'react';
+import React from 'react';
 import {Box} from '@chakra-ui/react';
 import  ImageApiService  from './services/ImageApiService';
 
