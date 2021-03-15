@@ -9,7 +9,7 @@ interface IUser {
   photo?: string,
   about?: string,
   location?: string,
-  eventList?: object[]
+  eventList?: object[] | []
 }
 
 interface IUserDoc extends IUser, Document {}
@@ -39,9 +39,7 @@ const UserSchemaFields: Record<keyof IUser, any> = {
   location: {
     type: String,
   },
-  eventList: [{
-    type: Schema.Types.ObjectId, ref: 'Events',
-  }],
+  eventList: [],
 };
 
 const UserSchema = new Schema(UserSchemaFields);

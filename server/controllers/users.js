@@ -12,11 +12,14 @@ const create = async (req, res) => {
   try {
     if (password === '') throw new Error();
     const hash = await bcrypt.hash(password, 10);
+    
     const newUser = new User({
       ...req.body,
       password: hash,
     });
-    const user = await newUser.save();
+    
+    const user = await newUser.save(); // This fails (4pm)
+    
     req.session.uid = user._id;
     res.status(201).send(user);
   } catch (error) {
@@ -43,13 +46,10 @@ const login = async (req, res) => {
 };
 
 const profile = async (req, res) => {
-  console.log('Getting');
   try {
     const populatedUser = await User.findOne({ _id: req.user._id}).populate('eventList');
-    // console.log(populatedUser);
     const { _id, firstName, lastName, host, photo, about, location, eventList } = populatedUser;
     const user = { _id, firstName, lastName, host, photo, about, location, eventList };
-    // console.log(user);
     res.status(200).send(user);
   } catch (error) {
     res.status(404).send({ error, message: 'User not found' });
@@ -74,7 +74,6 @@ const logout = (req, res) => {
 const getHostDetails = async (req,res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const populatedUser = await User.findOne({ _id: id}).populate('eventList');
     const { _id, firstName, lastName, host, photos, about, location, eventList } = populatedUser;
     const user = { _id, firstName, lastName, host, photos, about, location, eventList };
