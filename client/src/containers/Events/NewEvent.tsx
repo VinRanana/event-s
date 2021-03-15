@@ -39,10 +39,8 @@ export default function NewEvent ({createEvent, user}: NewEventInterface) {
   const [event, setEvent] = useState(EventObject)
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> = (e) => {
-    console.log(e.target)
     let { name, value } = e.target
     setEvent({ ...event, [name]: value })
-    console.log(event)
   }
 
   const handleSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -52,7 +50,7 @@ export default function NewEvent ({createEvent, user}: NewEventInterface) {
     } else if (event.name === '' || event.location === '') {
       alert('Please fill out all the required fields')
     }
-    console.log('hello')
+    event.user = user;
     createEvent(event)
     setEvent(EventObject)
   }

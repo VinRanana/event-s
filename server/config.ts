@@ -11,3 +11,5 @@ export const config: Config = {
   dbName: 'solo',
   dbPort: '27017'
 }
+
+// store in a .env file
