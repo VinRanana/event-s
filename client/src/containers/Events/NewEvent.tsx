@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEventHandler, MouseEventHandler, useState } from 'react';
 import {
   Flex,
   Text,
@@ -16,8 +16,15 @@ import {
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { motion } from 'framer-motion'
+import { EventInterface } from '../../interfaces/events.interfaces';
+import { UserInterface } from '../../interfaces/user.interfaces';
 
-const EventObject = {
+interface NewEventInterface {
+  createEvent: Function,
+  user: UserInterface
+}
+
+const EventObject: EventInterface = {
   name: '',
   limit: 1,
   location: '',
@@ -28,17 +35,17 @@ const EventObject = {
   photo: 'https://source.unsplash.com/random/300x300'
 }
 
-export default function NewEvent({createEvent, user}) {
+export default function NewEvent ({createEvent, user}: NewEventInterface) {
   const [event, setEvent] = useState(EventObject)
 
-  let handleInputChange = (e) => {
+  const handleInputChange: ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> = (e) => {
     console.log(e.target)
     let { name, value } = e.target
     setEvent({ ...event, [name]: value })
     console.log(event)
   }
 
-  function handleSubmit (e) {
+  const handleSubmit: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     if(event.date === '' || event.date < new Date().toISOString()) {
       alert('Please select a date in the future')
@@ -50,6 +57,8 @@ export default function NewEvent({createEvent, user}) {
     setEvent(EventObject)
   }
 
+  const transition = { type: 'spring', stiffness: 100, ease: 'easeIn', delay: 0.5, duration: 1 }
+
   return (
     <Flex minH={'100vh'} align={'center'} justify={'center'} 
           bgImage="url('https://res.cloudinary.com/dujun1hoe/image/upload/v1615228154/event-s/gradient-background-26046-26731-hd-wallpapers.jpg_cenrqe.png')"  
@@ -57,7 +66,7 @@ export default function NewEvent({createEvent, user}) {
     >
       <Box rounded={'lg'} bg={'white'} boxShadow={'base'} p={8} minH={'80vh'} minW={'40vh'} w={'80%'} >
        <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
-                   transition={{ type: 'spring', stiffness: 100, ease: 'easeIn', delay: 0.5, duration: 1 }}
+                   transition={{ transition }}
         >
           { user.host ?
             <>
