@@ -1,11 +1,12 @@
 import ReactDOM from "react-dom";
-import Login from "./Login";
 import { render } from '@testing-library/react';
 import { Router } from "react-router";
 import { createMemoryHistory } from 'history'
 import userEvent from "@testing-library/user-event";
+import Login from "./Login";
 
 
+const fakeUser = { email: 'john@doe.com', password: '12345' };
 const history = []
 const setIsAuthenticated = jest.fn();
 jest.mock('../../services/UsersApiService', () => ({ login: () => ({}) }));
@@ -16,7 +17,6 @@ test('Login', async () => {
   const histroy = createMemoryHistory();
 
   const { container, getByLabelText, getByTestId } = render(<Router history={histroy} ><Login history={history} setIsAuthenticated={setIsAuthenticated} /></Router>);
-  const fakeUser = { email: 'john@doe.com', password: '12345' };
 
   const emailNode = getByLabelText(/email/i);
   const passwordNode = getByLabelText(/password/i);

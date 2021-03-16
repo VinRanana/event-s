@@ -43,14 +43,12 @@ export default function Login (props: AuthInterface)  {
     const { email, password } = state;
     const user = { email, password };
     const res = await UsersApiService.login(user);
-    console.log('res', res);
     if (res.error) {
       alert(`${res.message}`);
       setState(initialState);
     } else {
       props.setIsAuthenticated(true);
       auth.login(() => props.history.push('/profile'));
-      console.log('props.history', props.history);
     }
   };
 
