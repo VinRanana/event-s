@@ -43,14 +43,14 @@ export default function Login (props: AuthInterface)  {
     const { email, password } = state;
     const user = { email, password };
     const res = await UsersApiService.login(user);
+    console.log('res', res);
     if (res.error) {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-
       props.setIsAuthenticated(true);
       auth.login(() => props.history.push('/profile'));
-
+      console.log('props.history', props.history);
     }
   };
 
@@ -91,7 +91,7 @@ export default function Login (props: AuthInterface)  {
                 </FormControl>
 
                 <Button bg={'custom.200'} color={'white'} _hover={{ bg: 'custom.300', }}
-                  isDisabled={validateForm()} onClick={handleSubmit}
+                  isDisabled={validateForm()} onClick={handleSubmit} data-testid="signInButton"
                 >
                   Sign in
                 </Button>
