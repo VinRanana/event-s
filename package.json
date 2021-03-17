@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@testing-library/cypress": "^7.0.4",
     "cypress": "^6.7.0",
     "cz-conventional-changelog": "^3.3.0"
   },
