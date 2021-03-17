@@ -28,7 +28,7 @@ function Home() {
             <Image src={'logo-white.png'}  alt="" ></Image>
 
             <Text color={'black'} fontWeight={300} lineHeight={1}
-                  fontSize={useBreakpointValue({ base: 'xl', md: '2xl' })} >
+                  fontSize={useBreakpointValue({ base: 'xl', md: '2xl' })} data-testid="subtitle" >
               A platform to bring people with similar interest together. Check out what's happening near to you.
             </Text>
 
