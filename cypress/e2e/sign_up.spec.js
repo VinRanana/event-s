@@ -1,4 +1,4 @@
-describe.only('Signup process', () => {
+describe('Signup process', () => {
 const URL = 'http://localhost:3000/';
 const timestamp = Date.now();
 // const randomNumber = Math.trunc(Math.random() * 1000000);
