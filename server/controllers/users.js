@@ -5,10 +5,13 @@ const create = async (req, res) => {
 
   const { email, password } = req.body;
   const user = await User.findOne({ email: email });
-  if (user)
+
+  if (user) {
     return res
       .status(409)
       .send({ error: '409', message: 'User already exists' });
+  }
+
   try {
     if (password === '') throw new Error();
     const hash = await bcrypt.hash(password, 10);
@@ -29,7 +32,6 @@ const create = async (req, res) => {
 };
 
 const login = async (req, res) => {
-
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
@@ -42,7 +44,6 @@ const login = async (req, res) => {
       .status(401)
       .send({ error: '401', message: 'Username or password is incorrect' });
   }
-
 };
 
 const profile = async (req, res) => {
@@ -57,7 +58,6 @@ const profile = async (req, res) => {
 };
 
 const logout = (req, res) => {
-
   req.session.destroy((error) => {
     if (error) {
       res
@@ -70,8 +70,7 @@ const logout = (req, res) => {
   });
 };
 
-
-const getHostDetails = async (req,res) => {
+const getHostDetails = async (req, res) => {
   try {
     const { id } = req.params;
     const populatedUser = await User.findOne({ _id: id}).populate('eventList');
@@ -79,34 +78,33 @@ const getHostDetails = async (req,res) => {
     const user = { _id, firstName, lastName, host, photos, about, location, eventList };
     res.status(200);
     res.send(user);
-  } catch (O_O) {
-    console.error('SINGLE HOST: ',O_O);
+  } catch (error) {
+    console.error('SINGLE HOST: ', error);
     res.status(500);
-    res.send(O_O);
+    res.send(error);
   }
 };
 
-
 // Dev only
-const getUsers = async (req,res) => {
+const getUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.status(200);
     res.send(users);
-  } catch (O_O) {
-    console.error('GET USERS: ',O_O);
+  } catch (error) {
+    console.error('GET USERS: ', error);
     res.status(500);
-    res.send(O_O);
+    res.send(error);
   }
 };
-const deleteUser = async (req,res) => {
+const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     await User.deleteOne({ _id: id});
     res.status(204);
     res.send({msg: `Deleted user ${id}`});
   } catch (error) {
-    console.error('DELETE USER: ',error);
+    console.error('DELETE USER: ', error);
     res.status(500);
     res.send(error);
   }
