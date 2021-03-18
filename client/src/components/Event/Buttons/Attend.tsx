@@ -14,7 +14,7 @@ export default function Attend ({ handleSubmit }: HandleSubmitInterface) {
     <Popover>
     
       <PopoverTrigger>
-        <Button w={'40%'}>Attend</Button>
+        <Button w={'40%'} data-testid="attend1">Attend</Button>
       </PopoverTrigger>
 
       <Portal>
@@ -26,7 +26,7 @@ export default function Attend ({ handleSubmit }: HandleSubmitInterface) {
           <PopoverBody>
             <ButtonGroup size="sm">
               <Button variant="outline">Cancel</Button>
-              <Button onClick={handleSubmit} colorScheme="gray">Attend</Button>
+              <Button onClick={handleSubmit} colorScheme="gray" data-testid="attend2">Attend</Button>
             </ButtonGroup>
           </PopoverBody>
 

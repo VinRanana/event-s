@@ -8,11 +8,9 @@ const config = require('./config').config;
 const app = express();
 
 const corsConfig = {
-
   origin: 'http://localhost:3000',
   credentials: true,
-
-};
+}; // can store this in .env
 
 app.use(cors(corsConfig));
 app.use(express.urlencoded({ extended: true }));
@@ -61,9 +59,7 @@ app.get('*', (req, res) => {
 
     `);
     });
-  } catch (O_O) {
-    console.log(O_O);
+  } catch (error) {
+    console.log(error);
   }
 })();
-
-// commitizen test

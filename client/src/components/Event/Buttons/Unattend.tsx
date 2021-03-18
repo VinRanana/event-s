@@ -14,7 +14,7 @@ export default function Unattend ({unattend}: HandleSubmitInterface) {
     <Popover>
 
       <PopoverTrigger>
-        <Button w={'40%'} >Unattend</Button>
+        <Button w={'40%'} data-testid="unattend1">Unattend</Button>
       </PopoverTrigger>
       
       <Portal>
@@ -26,7 +26,7 @@ export default function Unattend ({unattend}: HandleSubmitInterface) {
           <PopoverBody>
             <ButtonGroup size="sm">
                 <Button variant="outline">Cancel</Button>
-                <Button onClick={unattend} colorScheme="gray">Unattend</Button>
+                <Button onClick={unattend} colorScheme="gray" data-testid="unattend2">Unattend</Button>
               </ButtonGroup>
           </PopoverBody>
           

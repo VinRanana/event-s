@@ -43,12 +43,11 @@ export default function Register (props: AuthInterface) {
       ...prevState,
       [name]: value
     }));
-    console.log(state)
   };
 
   const handleSubmit: MouseEventHandler = async (e) => {
     e.preventDefault();
-
+    
     const { email, password, firstName, lastName, host, photo } = state;
     const user = { email, password, firstName, lastName, host, photo };
     const res = await UsersApiService.register(user);
@@ -87,17 +86,25 @@ export default function Register (props: AuthInterface) {
               <FormControl id="first_name" >
                 <FormLabel>First name</FormLabel>
                 <Input id="first_name" placeholder="First Name" name="firstName" value={state.firstName} onChange={handleChange} />
-
+              </FormControl>
+                
+              <FormControl id="last_name">
                 <FormLabel>Last name</FormLabel>
                 <Input id="last_name" placeholder="Last Name" name="lastName" value={state.lastName} onChange={handleChange} />
-
+              </FormControl>
+              
+              <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
                 <Input type="email" id="email" placeholder="name@email.com" name="email" value={state.email} onChange={handleChange} />
                 <FormHelperText>I'll never share your email. I don't know how!</FormHelperText>
-
+              </FormControl>
+              
+              <FormControl id="password">
                 <FormLabel>Password</FormLabel>
                 <Input type="password" placeholder="Choose a password" name="password" value={state.password} onChange={handleChange} />
-
+              </FormControl>
+              
+              <FormControl id="photo">
                 <FormLabel>Photo</FormLabel>
                 <Input id="photo" placeholder="Insert a link to your event photo" value={state.photo} name="photo" onChange={handleChange} />
               </FormControl>
@@ -105,7 +112,7 @@ export default function Register (props: AuthInterface) {
               <Stack spacing={10} >
                 <FormControl id="type" >
                   <FormLabel>Type of user</FormLabel>
-                  <Select name="host" onChange={handleChange} placeholder="Hosting or attending?" >
+                  <Select id="type" name="host" onChange={handleChange} placeholder="Hosting or attending?" >
                     <option>Guest</option>
                     <option>Host</option>
                   </Select>

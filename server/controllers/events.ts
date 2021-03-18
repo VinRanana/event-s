@@ -8,24 +8,26 @@ exports.getEvents = async (req: Request, res: Response) => {
     const events = await Events.find();
     res.status(200);
     res.send(events);
-  } catch (O_O) {
-    console.error('GET EVENTS: ',O_O);
+  } catch (error) {
+    console.error('GET EVENTS: ',error);
     res.status(500);
-    res.send(O_O);
+    res.send(error);
   }
 };
+
 exports.getSingleEvent = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const event = await Events.find({_id: id});
     res.status(200);
     res.send(event);
-  } catch (O_O) {
-    console.error('SINGLE EVENT: ',O_O);
+  } catch (error) {
+    console.error('SINGLE EVENT: ',error);
     res.status(500);
-    res.send(O_O);
+    res.send(error);
   }
 };
+
 exports.postEvent = async (req: Request, res: Response) => {
   try {
     const { _id } = req.body.user; // Added the '.body' in
@@ -37,10 +39,10 @@ exports.postEvent = async (req: Request, res: Response) => {
     const addToUser = await User.findByIdAndUpdate(_id, { $push: { eventList: events._id}},{new:true});
     res.status(201);
     res.send(events);
-  } catch (O_O) {
-    console.error('POST EVENT: ',O_O);
+  } catch (error) {
+    console.error('POST EVENT: ',error);
     res.status(400);
-    res.send(O_O);
+    res.send(error);
   }
 };
 
@@ -63,7 +65,6 @@ exports.deleteEvent = async (req: Request, res: Response) => {
 };
 
 exports.updateEvent = async (req: Request, res: Response) => {
-
   try {
     const { id } = req.params;
     const event = await Events.findByIdAndUpdate(
@@ -92,6 +93,7 @@ exports.attendEvent = async (req: Request, res: Response) => {
     res.status(404).send({ error, message: 'Could not assign user to event' });
   }
 };
+
 exports.unattendEvent = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

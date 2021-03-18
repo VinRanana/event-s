@@ -73,7 +73,7 @@ export default function NewEvent ({createEvent, user}: NewEventInterface) {
               <Flex justify={'center'} justifyContent={'space-between'} alignContent={'center'} wrap={'wrap'} >
                 <FormControl id="name" >
                   <FormLabel>Name of event</FormLabel>
-                  <Input value={event.name} name="name" onChange={handleInputChange} id="first_name" placeholder="Type something..." />
+                  <Input value={event.name} name="name" onChange={handleInputChange} id="name" placeholder="Type something..." />
                 </FormControl>
 
                 <FormControl id="location" >
@@ -114,12 +114,13 @@ export default function NewEvent ({createEvent, user}: NewEventInterface) {
                 </Flex>
               </Flex>
               <Box>
-                <Text mb="8px" >Description:</Text>
-
-                <Textarea placeholder="Describe your event" size="sm" value={event.description} name="description" onChange={handleInputChange} />
+                <FormControl id="description">
+                  <FormLabel mb="8px" >Description:</FormLabel>
+                  <Textarea placeholder="Describe your event" size="sm" value={event.description} name="description" onChange={handleInputChange} />
+                </FormControl>
               </Box>
 
-              <FormControl mt={4} mb={4} >
+              <FormControl mt={4} mb={4} id="date" >
                 <InputGroup>
                   <FormLabel>Date</FormLabel>
 
