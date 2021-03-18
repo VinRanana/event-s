@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "cypress": "^6.7.1",
     "cz-conventional-changelog": "^3.3.0"
   },
   "config": {
