@@ -81,7 +81,7 @@ Andras Varadi - [Github](https://github.com/andrasvaradi) - [LinkedIn](www.linke
 
 ## Contributors
 
-Davinder Rana - [Github](https://github.com/VinRanana) - [LinkedIn](https://www.linkedin.com/in/davinder-rana/)
+Davinder Rana - [Github](https://github.com/VinRanana) - [LinkedIn](https://www.linkedin.com/in/d-rana/)
 
 Joachim Liedtke - [Github](https://github.com/JoachimLi) - [LinkedIn](https://www.linkedin.com/in/joachim-liedtke/)
 
