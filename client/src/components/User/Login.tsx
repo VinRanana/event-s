@@ -47,10 +47,8 @@ export default function Login (props: AuthInterface)  {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-
       props.setIsAuthenticated(true);
       auth.login(() => props.history.push('/profile'));
-
     }
   };
 
@@ -91,7 +89,7 @@ export default function Login (props: AuthInterface)  {
                 </FormControl>
 
                 <Button bg={'custom.200'} color={'white'} _hover={{ bg: 'custom.300', }}
-                  isDisabled={validateForm()} onClick={handleSubmit}
+                  isDisabled={validateForm()} onClick={handleSubmit} data-testid="signInButton"
                 >
                   Sign in
                 </Button>

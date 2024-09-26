@@ -1,3 +1,5 @@
+import React, { SetStateAction } from "react";
+
 export interface UserInterface {
   email: string,
   password: string,
@@ -13,10 +15,10 @@ export interface UserInterface {
 
 export interface ProfileInterface {
   user: UserInterface,
-  setUser: Function
+  setUser: Function //change type like line 23
 }
 
 export interface AuthInterface {
   history: string[],
-  setIsAuthenticated: Function
+  setIsAuthenticated: React.Dispatch<SetStateAction<boolean>>
 }

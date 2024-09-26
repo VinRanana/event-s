@@ -61,7 +61,7 @@ export default function NavigationBar({ isAuthenticated, user }: NavBarInterface
 
           <Flex alignItems={'center'} >
             <Menu placement="top-end" >
-              <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} >
+              <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} data-testid="avatar">
                 <Avatar size={'sm'} src={isAuthenticated ? user.photo : ''} />
               </MenuButton>
 
